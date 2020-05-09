@@ -42,7 +42,7 @@ $ pip3 install -r requirements.txt
 ```
 # [ Running ]
 ```
-$ python3 run.py
+$ python3 check.py
 ```
 
 [Canal:] https://www.youtube.com/opersweenlinux
