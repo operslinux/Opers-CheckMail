@@ -45,15 +45,16 @@ def MenuInicial():
 def verify():
     if os.path.isfile("/usr/bin/geckodriver") == True:
 
-        print("{} El archivo si existe {} < Ejecutando Script > {}".format(Fore.BLUE, Fore.WHITE, Fore.RESET))
+        print("{} [ {} + {} ] {} El archivo si existe {} <Ejecutando Script> {}".format(Fore.BLUE, Fore.GREEN, Fore.BLUE, Fore.BLUE, Fore.GREEN, Fore.RESET))
         Carga()
     else:
-        print("{} El archivo no existe, {} < Comenzando Descarga...... > {}".format(Fore.RED, Fore.WHITE, Fore.RESET))
+        print("{} [ {} X {} ] {} el archivo no existe, {} comenzando DESCARGA.... {}".format(Fore.BLUE, Fore.RED, Fore.BLUE, Fore.RED, Fore.WHITE, Fore.RESET))
         Carga()
         os.system("wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz")
         os.system("sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.26.0-linux64.tar.gz -O > /usr/bin/geckodriver'")
         os.system("sudo chmod +x /usr/bin/geckodriver")
         os.system("rm geckodriver-v0.26.0-linux64.tar.gz")
+        print("{} [ {} + {} ] {} DRIVER DESCARGADO ...... ".format(Fore.BLUE, Fore.GREEN, Fore.BLUE, Fore.WHITE))
 
 
 
@@ -69,7 +70,7 @@ def main():
             #LogoTwo()
             #print("La Linea seleccionada es: ", linea)
             #print("La enumeracion es: ", i)
-            print("{} < Correo numero: > {}".format(Fore.YELLOW, Fore.RESET) + str(i))
+            print("{} [ {} + {} ] {} < Correo numero: > {}".format(Fore.BLUE, Fore.GREEN, Fore.BLUE, Fore.YELLOW, Fore.RESET) + str(i))
             driver = webdriver.Firefox()
             driver.get("https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1588997537&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d850f8727-1591-ae21-b585-c72698a99647&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015&contextid=FE61C9D2AF928E56&bk=1588997538&uiflavor=web&lic=1&mkt=EN-US&lc=1033&uaid=712c21a23c1143ab9fdc2cce33864bbf")
             alert = Alert(driver)
@@ -94,13 +95,13 @@ def main():
                 Carga()
                 try:
                     driver.find_element_by_xpath('//*[@id="PasswordInput"]').send_keys("jajajaj")
-                    print("{} < EL CORREO NO EXISTE > {}".format(Fore.RED, Fore.RESET) )
+                    print("{} [ {} X {} ] {} < EL CORREO NO EXISTE > {}".format(Fore.BLUE, Fore.RED, Fore.BLUE, Fore.RED, Fore.RESET))
                     print("{} ________________________________________ {}".format(Fore.WHITE, Fore.RESET))
                     f = open('NO-EXISTE.txt', 'a')
                     f.write(str(victima))
                     f.close()
                 except NoSuchElementException as exception:
-                    print("{} EL correo ya existe :( {}".format(Fore.GREEN, Fore.RESET))
+                    print("{} [ {} + {} ] {} EL correo ya existe :( {}".format(Fore.BLUE, Fore.GREEN, Fore.BLUE, Fore.GREEN, Fore.RESET))
                     print("{} ________________________________________ {} ".format(Fore.WHITE, Fore.RESET))
                     f = open('SI-EXISTE.txt', 'a')
                     f.write(str(victima))
@@ -116,13 +117,16 @@ def main():
                 Carga()
                 try:
                     driver.find_element_by_xpath('//*[@id="PasswordInput"]').send_keys("jajajaj")
-                    print("{} < EL CORREO NO EXISTE > {}".format(Fore.RED, Fore.RESET))
+                    print(
+                        "{} [ {} X {} ] {} < EL CORREO NO EXISTE > {}".format(Fore.BLUE, Fore.RED, Fore.BLUE, Fore.RED,
+                                                                              Fore.RESET))
                     print("{} ________________________________________ {}".format(Fore.WHITE, Fore.RESET))
                     f = open('NO-EXISTE.txt', 'a')
                     f.write(victima)
                     f.close()
                 except NoSuchElementException as exception:
-                    print("{} EL correo ya existe :( {}".format(Fore.GREEN, Fore.RESET))
+                    print("{} [ {} + {} ] {} EL correo ya existe :( {}".format(Fore.BLUE, Fore.GREEN, Fore.BLUE,
+                                                                               Fore.GREEN, Fore.RESET))
                     print("{} ________________________________________ {} ".format(Fore.WHITE, Fore.RESET))
                     f = open('SI-EXISTE.txt', 'a')
                     f.write(victima)
