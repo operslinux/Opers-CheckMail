@@ -35,6 +35,9 @@ $ git clone https://github.com/operslinux/Opers-CheckMail.git
 ```
 $ cd Opers-CheckMail
 ```
+```
+$sudo chmod +x check.py
+```
 
 # [ Setup ]
 ```
