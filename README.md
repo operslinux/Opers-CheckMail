@@ -21,6 +21,10 @@ Este es un pequeño script muy sencillo para poder automatizar el chequeo de cor
 ```
 
 <a href="https://ibb.co/ryWr9Q5"><img src="https://i.ibb.co/Bs1MkfT/pa.png" alt="pa" border="0"></a><a href="https://ibb.co/ryWr9Q5"><img src="https://i.ibb.co/Bs1MkfT/pa.png" alt="pa" border="0"></a>
+```
+Kali LInux
+Parrot OS
+```
 
 # [Instalacion]
 ```
