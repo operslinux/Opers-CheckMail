@@ -4,9 +4,12 @@ from form.logo import LogoOne, LogoCero, LogoTwo
 from selenium import webdriver
 from colorama import Back, Fore, init
 from tqdm import tqdm
-from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 import os
 #iniciamos colores
 from time import sleep
@@ -72,21 +75,25 @@ def main():
             #print("La Linea seleccionada es: ", linea)
             #print("La enumeracion es: ", i)
             print("{} [ {} + {} ] {} < Correo numero: > {}".format(Fore.BLUE, Fore.GREEN, Fore.BLUE, Fore.YELLOW, Fore.RESET) + str(i))
-            driver = webdriver.Firefox()
-            driver.get("https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1588997537&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d850f8727-1591-ae21-b585-c72698a99647&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015&contextid=FE61C9D2AF928E56&bk=1588997538&uiflavor=web&lic=1&mkt=EN-US&lc=1033&uaid=712c21a23c1143ab9fdc2cce33864bbf")
-            alert = Alert(driver)
-            alert.accept()
-            #alert.dismiss()
-            Carga()
+
             correo = linea.split("@")
             #print(correo[0])
             #print(correo[1])
-            email = driver.find_element_by_xpath('//*[@id="MemberName"]')
-            email.send_keys(correo[0])
+
             salida = correo[1]
             #print(salida)
 
             if "hotmail" in salida:
+                driver = webdriver.Firefox()
+                driver.get(
+                    "https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1588997537&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d850f8727-1591-ae21-b585-c72698a99647&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015&contextid=FE61C9D2AF928E56&bk=1588997538&uiflavor=web&lic=1&mkt=EN-US&lc=1033&uaid=712c21a23c1143ab9fdc2cce33864bbf")
+                alert = Alert(driver)
+                alert.accept()
+                # alert.dismiss()
+                Carga()
+                email = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, '//*[@id="MemberName"]')))
+                email.send_keys(correo[0])
                 victima = correo[0] + "@" + correo[1]
                 print(victima)
                 print("{} < EL correo es: > ".format(Fore.WHITE) + salida + "{}".format(Fore.RESET))
@@ -108,9 +115,20 @@ def main():
                     f.write(str(victima))
                     f.close()
 
+                driver.close()
                 Carga()
 
             elif "outlook" in salida:
+                driver = webdriver.Firefox()
+                driver.get(
+                    "https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1588997537&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d850f8727-1591-ae21-b585-c72698a99647&id=292841&aadredir=1&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015&contextid=FE61C9D2AF928E56&bk=1588997538&uiflavor=web&lic=1&mkt=EN-US&lc=1033&uaid=712c21a23c1143ab9fdc2cce33864bbf")
+                alert = Alert(driver)
+                alert.accept()
+                # alert.dismiss()
+                Carga()
+                email = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, '//*[@id="MemberName"]')))
+                email.send_keys(correo[0])
                 victima = correo[0] + "@" + correo[1]
                 print(victima)
                 print("{} < EL correo es: > ".format(Fore.WHITE) + salida + "{}".format(Fore.RESET))
@@ -132,6 +150,7 @@ def main():
                     f = open('SI-EXISTE.txt', 'a')
                     f.write(victima)
                     f.close()
+                driver.close()
                 Carga()
             else:
                 victima = correo[0] + "@" + correo[1]
@@ -143,7 +162,8 @@ def main():
                 f.write(victima)
                 f.close()
             Carga()
-            driver.close()
+
+
     except FileNotFoundError:
         LogoTwo()
         print("EL archivo no existe en este directorio, vuelva a iniciar")
@@ -157,4 +177,5 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
+
         exit()
